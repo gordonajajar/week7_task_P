@@ -1,0 +1,33 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 03.10.2025 21:19:56
+// Design Name: 
+// Module Name: toggle_set
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module toggle_set(
+    input clk, input debounced, output reg to_toggle = 1
+    );
+    reg debounced_p = 0;
+    always @ (posedge clk) begin
+        debounced_p <= debounced;
+        if (debounced && ~debounced_p) begin
+            to_toggle <= ~to_toggle;
+        end
+    end
+endmodule
