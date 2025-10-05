@@ -30,8 +30,7 @@ module draw_characters(
     localparam GREEN = 16'h07E0;
     localparam RED = 16'hF800;
     localparam BLUE = 16'h001F;
-    localparam MAGENTA = 16'hF81F;
-    
+    localparam MAGENTA = 16'hF87A;    
     
     // describes the top left positions of left and right characters to be drawn
     localparam LEFTCHAR_x = 18;
