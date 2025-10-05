@@ -15,7 +15,7 @@
 module Task_P_Gordon (
     input clk, 
     input btnC, btnL, btnR,
-    input [12:0] pixel_index,
+    input [6:0] x, y,
     output [15:0] oled_data
     );
     
@@ -30,7 +30,8 @@ module Task_P_Gordon (
     button_controller(.clk(clk), .clock_1000Hz(clock_1000Hz), 
                       .btnL(btnL), .btnR(btnR), .set9(set9));
 
-     draw_characters draw(.pixel_index(pixel_index), .set9(set9),
+    
+    draw_characters draw(.px(x), .py(y), .set9(set9),
                           .clock_1000Hz(clock_1000Hz), .btnL(btnL), .btnR(btnR),
                           .oled_data(oled_data));
 

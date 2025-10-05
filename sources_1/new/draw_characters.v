@@ -21,7 +21,7 @@
 
 
 module draw_characters(
-    input [12:0] pixel_index, [1:0] set9,
+    input [6:0] px, py, [1:0] set9,
     input clock_1000Hz, btnL, btnR, // for circle sampling
     output [15:0] oled_data
     );
@@ -32,10 +32,6 @@ module draw_characters(
     localparam BLUE = 16'h001F;
     localparam MAGENTA = 16'hF81F;
     
-    wire [6:0] px; 
-    wire [6:0] py;
-    assign px = pixel_index % 96;
-    assign py = pixel_index / 96;
     
     // describes the top left positions of left and right characters to be drawn
     localparam LEFTCHAR_x = 18;

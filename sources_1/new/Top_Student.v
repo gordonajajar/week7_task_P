@@ -13,9 +13,11 @@
 
 module Top_Student (
     input clk, input btnC, btnL, btnR,
-    input sw[4],
     output [7:0] JC
     );
+    
+    wire clock_6p25MHz;
+    Custom_Clock u6p25Mhz(clk, 7, clock_6p25MHz);
     
     // OLED
     wire [15:0] oled_data;
@@ -28,11 +30,17 @@ module Top_Student (
       .pixel_index(pixel_index), .pixel_data(oled_data), 
       .cs(JC[0]), .sdin(JC[1]), .sclk(JC[3]), .d_cn(JC[4]), .resn(JC[5]), .vccen(JC[6]), .pmoden(JC[7]));
 
+    wire [6:0] px; 
+    wire [6:0] py;
+    assign px = pixel_index % 96;
+    assign py = pixel_index / 96;
+    
     Task_P_Gordon taskP(.clk(clk),
                         .btnC(btnC),
                         .btnL(btnL),
                         .btnR(btnR),
-                        .pixel_index(pixel_index),
+                        .x(px),
+                        .y(py),
                         .pixel_data(taskP_pixel_data));
     
     
