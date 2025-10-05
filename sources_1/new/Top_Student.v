@@ -36,6 +36,7 @@ module Top_Student (
     assign py = pixel_index / 96;
     
     Task_P_Gordon taskP(.clk(clk),
+                        .set(set),
                         .btnC(btnC),
                         .btnL(btnL),
                         .btnR(btnR),

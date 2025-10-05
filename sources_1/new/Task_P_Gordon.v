@@ -14,25 +14,26 @@
 
 module Task_P_Gordon (
     input clk, 
+    input set,
     input btnC, btnL, btnR,
     input [6:0] x, y,
     output [15:0] oled_data
     );
-    
-    // clocks
-    wire clock_6p25MHz;
-    wire clock_1000Hz;
-    Custom_Clock u6p25Mhz(clk, 7, clock_6p25MHz);
-    Custom_Clock u1000Hz(clk, 49999, clock_1000Hz);
-    
-    // toggle both 9s, with debouncing
-    wire [1:0] set9; // left bit (MSB) sets left 9 drawn, right bit sets right 9 drawn
-    button_controller(.clk(clk), .clock_1000Hz(clock_1000Hz), 
-                      .btnL(btnL), .btnR(btnR), .set9(set9));
 
+        // clocks
+        wire clock_6p25MHz;
+        wire clock_1000Hz;
+        Custom_Clock u6p25Mhz(clk, 7, clock_6p25MHz);
+        Custom_Clock u1000Hz(clk, 49999, clock_1000Hz);
+        
+        // toggle both 9s, with debouncing
+        wire [1:0] set9; // left bit (MSB) sets left 9 drawn, right bit sets right 9 drawn
+        button_controller(.set(set), .clk(clk), .clock_1000Hz(clock_1000Hz), 
+                          .btnL(btnL), .btnR(btnR), .set9(set9));
     
-    draw_characters draw(.px(x), .py(y), .set9(set9),
-                          .clock_1000Hz(clock_1000Hz), .btnL(btnL), .btnR(btnR),
-                          .oled_data(oled_data));
+        
+        draw_characters draw(.px(x), .py(y), .set9(set9),
+                              .clock_1000Hz(clock_1000Hz), .btnL(btnL), .btnR(btnR),
+                              .oled_data(oled_data));
 
 endmodule

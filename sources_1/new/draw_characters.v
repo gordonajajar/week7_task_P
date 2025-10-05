@@ -40,6 +40,7 @@ module draw_characters(
     localparam circle_x = 7; localparam circle_y = 7;
     wire [15:0] left_data, right_data, circle_data; // output colour of individual draw modules
     
+    
     draw_digit uLeft9(.set(set9[1]), .value(9),
                       .px(px), .py(py), .base_x(LEFTCHAR_x), .base_y(CHAR_y),
                       .colour(RED), .oled_data(left_data));

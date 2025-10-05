@@ -21,7 +21,7 @@
 
 
 module button_controller(
-    input clk, clock_1000Hz, btnL, btnR, [1:0] set9
+    input set, clk, clock_1000Hz, btnL, btnR, [1:0] set9
     );
     
     // debounce btnL and btnR with 1000Hz clock
@@ -31,6 +31,6 @@ module button_controller(
     debouncer debounce_btnR(clock_1000Hz, btnR, btnR_debounced); 
     
     // this checks for a discrete press and toggles set appropriately   
-    toggle_set toggleSet9_1(clk, btnL_debounced, set9[1]);
-    toggle_set toggleSet9_0(clk, btnR_debounced, set9[0]);   
+    toggle_set toggleSet9_1(set, clk, btnL_debounced, set9[1]);
+    toggle_set toggleSet9_0(set, clk, btnR_debounced, set9[0]);   
 endmodule
