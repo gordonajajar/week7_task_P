@@ -31,5 +31,8 @@ module toggle_set(
                 to_toggle <= ~to_toggle;
             end
         end
+        else begin
+            to_toggle <= 1;
+        end
     end
 endmodule

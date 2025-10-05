@@ -32,7 +32,7 @@ module Task_P_Gordon (
                           .btnL(btnL), .btnR(btnR), .set9(set9));
     
         
-        draw_characters draw(.px(x), .py(y), .set9(set9),
+        draw_characters draw(.set(set), .px(x), .py(y), .set9(set9),
                               .clock_1000Hz(clock_1000Hz), .btnL(btnL), .btnR(btnR),
                               .oled_data(oled_data));
 

@@ -13,6 +13,7 @@
 
 module Top_Student (
     input clk, input btnC, btnL, btnR,
+    input sw,
     output [7:0] JC
     );
     
@@ -36,7 +37,7 @@ module Top_Student (
     assign py = pixel_index / 96;
     
     Task_P_Gordon taskP(.clk(clk),
-                        .set(set),
+                        .set(sw),
                         .btnC(btnC),
                         .btnL(btnL),
                         .btnR(btnR),

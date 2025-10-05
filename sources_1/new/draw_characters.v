@@ -21,6 +21,7 @@
 
 
 module draw_characters(
+    input set,
     input [6:0] px, py, [1:0] set9,
     input clock_1000Hz, btnL, btnR, // for circle sampling
     output [15:0] oled_data
@@ -51,8 +52,13 @@ module draw_characters(
     // poll btns to change circle color at 1000Hz
     reg [15:0] circle_col = WHITE;
     always @ (posedge clock_1000Hz) begin
-        if (btnL || btnR) circle_col <= MAGENTA;
-        else circle_col <= WHITE;
+        if (set) begin
+            if (btnL || btnR) circle_col <= MAGENTA;
+            else circle_col <= WHITE;
+        end
+        else begin
+            circle_col <= WHITE;
+        end
     end
     
     draw_circle uCircle(.px(px), .py(py), .base_x(circle_x), .base_y(circle_y), 
