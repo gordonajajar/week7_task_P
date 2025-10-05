@@ -11,10 +11,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+
 module Task_P_Gordon (
-    input clk, input btnC, btnL, btnR,
-    input sw,
-    output [7:0] JC
+    input clk, 
+    input btnC, btnL, btnR,
+    input [12:0] pixel_index,
+    output [15:0] oled_data
     );
     
     // clocks
@@ -28,18 +30,6 @@ module Task_P_Gordon (
     button_controller(.clk(clk), .clock_1000Hz(clock_1000Hz), 
                       .btnL(btnL), .btnR(btnR), .set9(set9));
 
-    
-    // OLED
-    wire [15:0] oled_data;
-    wire frame_begin, sending_pixels, sample_pixel;
-    wire [12:0] pixel_index;
-    Oled_Display uDisplay(
-      .clk(clock_6p25MHz), .reset(btnC), 
-      .frame_begin(frame_begin), .sending_pixels(sending_pixels),
-      .sample_pixel(sample_pixel), 
-      .pixel_index(pixel_index), .pixel_data(oled_data), 
-      .cs(JC[0]), .sdin(JC[1]), .sclk(JC[3]), .d_cn(JC[4]), .resn(JC[5]), .vccen(JC[6]), .pmoden(JC[7]));
-    
      draw_characters draw(.pixel_index(pixel_index), .set9(set9),
                           .clock_1000Hz(clock_1000Hz), .btnL(btnL), .btnR(btnR),
                           .oled_data(oled_data));
